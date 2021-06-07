@@ -3,6 +3,8 @@ import com.view.cView;
 
 public class cMain {
     public static void main(String[] args) throws Exception {
+
+        Scanner input = new Scanner(System.in);
         
         while(true){
 
@@ -15,7 +17,6 @@ public class cMain {
             + "0. Exit\n"
             + "Pilih[1/2/3/4/5/0] : ");
 
-            Scanner input = new Scanner(System.in);
             String pilihan = input.next();
 
             if( pilihan.equalsIgnoreCase("0") ){
@@ -28,10 +29,10 @@ public class cMain {
                     cView.getAllData();
                     break;
                 case "2" :
-                    System.out.println("Detail Data Barang");
+                    cView.detailData();
                     break;
                 case "3" :
-                    System.out.println("Cari Data Barang");
+                    cView.cariData();
                     break;
                 case "4" :
                     System.out.println("Tambah Data Barang");
@@ -44,8 +45,10 @@ public class cMain {
                     break;
             }
 
-
+            
         }
-
+        
+        // close input scanner nya
+        input.close();
     }
 }
