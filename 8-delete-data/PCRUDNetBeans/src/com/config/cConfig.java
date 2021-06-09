@@ -43,7 +43,7 @@ public class cConfig {
 
   public static String getAllData()
   {
-    cConfig.connection();
+    connection();
 
     // isi nilai default dari variabel data
     String data = "Data tidak ditemukan";
@@ -54,7 +54,7 @@ public class cConfig {
       statement = connect.createStatement();
 
       // query select all data from database
-      String query = "SELECT idBarang, namaBarang FROM tblbarang";
+      String query = "SELECT idBarang, namaBarang FROM tblbarang WHERE isActive = '1'";
 
       // eksekusi query-nya
       resultData = statement.executeQuery(query);
@@ -62,11 +62,16 @@ public class cConfig {
       // set variabel data jadi null
       data = "";
 
+      int count = 0;
       // looping pengisian variabel data
       while( resultData.next() ){
         data += "ID Barang : " + resultData.getInt("idBarang") + ", Nama Barang : " + resultData.getString("namaBarang") + "\n";
+        count++;
       }
       
+      if( count == 0 ){
+        data = "Data tidak ditemukan";
+      }
       
       // close statement dan connection
       statement.close();
@@ -84,7 +89,7 @@ public class cConfig {
   public static String detailData( int id )
   {
     // panggil method static connection
-    cConfig.connection();
+    connection();
     // ini adalah nilai default yang dikembalikan
     String data = "Data tidak ditemukan";
 
@@ -94,7 +99,7 @@ public class cConfig {
       statement = connect.createStatement();
 
       // buat query nya
-      String query = "SELECT * FROM tblbarang WHERE idBarang = " + id;
+      String query = "SELECT * FROM tblbarang WHERE isActive = '1' AND idBarang = " + id;
 
       // eksekusi querynya dan simpan ke result set
       resultData = statement.executeQuery(query);
@@ -102,12 +107,18 @@ public class cConfig {
       // set variabel data jadi null dulu
       data = "";
 
+      int count = 0;
       // looping untuk pengisian variabel data
       while( resultData.next() ){
         data += "- ID Barang : " + resultData.getInt("idBarang")
           + "\n- Nama Barang : " + resultData.getString("namaBarang")
           + "\n- Stok Barang : " + resultData.getString("stokBarang")
           + " buah\n- Harga Barang : Rp." + resultData.getString("hargaBarang");
+        count++;
+      }
+
+      if( count == 0 ){
+        data = "Data tidak ditemukan";
       }
 
       // close statement dan koneksinya
@@ -126,7 +137,7 @@ public class cConfig {
 
   public static String cariData( String keyword )
   {
-    cConfig.connection();
+    connection();
 
     String data = "Data tidak ditemukan";
 
@@ -134,7 +145,7 @@ public class cConfig {
 
       statement = connect.createStatement();
 
-      String query = "SELECT * FROM tblbarang WHERE idBarang LIKE '%" + keyword + "%' OR namaBarang LIKE '%" + keyword + "%' OR hargaBarang LIKE '%" + keyword + "%' OR stokBarang LIKE '%" + keyword + "%'";
+      String query = "SELECT * FROM tblbarang WHERE isActive = '1' AND ( idBarang LIKE '%" + keyword + "%' OR namaBarang LIKE '%" + keyword + "%' OR hargaBarang LIKE '%" + keyword + "%' OR stokBarang LIKE '%" + keyword + "%')";
 
       resultData = statement.executeQuery(query);
 
@@ -168,14 +179,14 @@ public class cConfig {
 
   public static boolean tambahData( String namaBarang, int stokBarang, int hargaBarang )
   {
-    cConfig.connection();
+    connection();
     boolean data = false;
 
     try {
 
       statement = connect.createStatement();
 
-      String query = "INSERT INTO tblbarang VALUES (" + null + ", '" + namaBarang + "', " + stokBarang + ", " + hargaBarang + ")";
+      String query = "INSERT INTO tblbarang VALUES (" + null + ", '" + namaBarang + "', " + stokBarang + ", " + hargaBarang + ", '1')";
 
       if( !statement.execute(query) ){
         data = true;
@@ -196,7 +207,7 @@ public class cConfig {
   public static boolean updateData( int idBarang, String namaBarang, int stokBarang, int hargaBarang )
   {
 
-    cConfig.connection();
+    connection();
     boolean data = false;
 
     try {
@@ -231,8 +242,6 @@ public class cConfig {
       
       if( !statement.execute(queryUpdate) ){
         data = true;
-      }else{
-        data = false;
       }
 
       // close statement dan close koneksi
@@ -246,5 +255,29 @@ public class cConfig {
 
     return data;
   }
+
+  public static boolean deleteData( int idBarang )
+  {
+    connection();
+    boolean data = false;
+
+    try {
+      
+      statement = connect.createStatement();
+
+      // String query = "DELETE FROM tblbarang WHERE idBarang = " + idBarang;
+      String query = "UPDATE tblbarang SET isActive = '0' WHERE idBarang = " + idBarang;
+
+      if( !statement.execute(query) ){
+        data = true;
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return data;
+  }
+
 
 }

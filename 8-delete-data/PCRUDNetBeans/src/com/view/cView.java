@@ -19,6 +19,7 @@ public class cView {
       + "3. Cari Data Barang\n"
       + "4. Tambah Data Barang\n"
       + "5. Update Data Barang\n"
+      + "6. Delete Data Barang\n"
       + "0. Exit\n"
       + "Pilih[1/2/3/4/5/0] : ");
 
@@ -31,19 +32,22 @@ public class cView {
 
       switch (pilihan) {
         case "1" :
-          cView.getAllData();
+          getAllData();
           break;
         case "2" :
-          cView.detailData();
+          detailData();
           break;
         case "3" :
-          cView.cariData();
+          cariData();
           break;
         case "4" :
-          cView.tambahData();
+          tambahData();
           break;
         case "5" :
-          cView.updateData();
+          updateData();
+          break;
+        case "6" :
+          deleteData();
           break;
         default:
           System.out.println("Pilihan salah!!");
@@ -61,7 +65,6 @@ public class cView {
     System.out.println(cConfig.getAllData()); 
 
   }
-
 
   public static void detailData()
   {
@@ -99,7 +102,7 @@ public class cView {
 
     if ( cConfig.tambahData(namaBarang, stokBarang, hargaBarang) ){
       System.out.println("Data Barang berhasil ditambahkan!!");
-      cView.getAllData();
+      getAllData();
     }else{
       System.out.println("Data Barang gagal ditambahkan!!");
     }
@@ -124,9 +127,24 @@ public class cView {
 
     if( cConfig.updateData(idBarang, namaBarang, stokBarang, hargaBarang) ){
       System.out.println("Data barang berhasil dirubah!!");
-      cView.getAllData();
+      getAllData();
     }else{
       System.out.println("Data barang gagal dirubah!!");
+    }
+
+  }
+
+  public static void deleteData()
+  {
+    System.out.println("\n:::DELETE DATA BARANG :::");
+    System.out.print("Masukkan ID Barang : ");
+    int idBarang = input.nextInt();
+
+    if( cConfig.deleteData(idBarang) ){
+      System.out.println("Data Barang Berhasil Dihapus!!");
+      getAllData();
+    }else{
+      System.out.println("Data Barang Gagal Dihapus!!");
     }
 
   }
