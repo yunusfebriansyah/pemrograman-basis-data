@@ -29,5 +29,9 @@ public class cFonts {
 
   public static final Font RADIO_BUTTON_FONT = new Font("Poppins Light", Font.PLAIN, 16);
 
+  public static final Font SIDEBAR_FONT = new Font("Poppins Semibold", Font.PLAIN, 18);
+
+  public static final Font HEADER_TABLE_FONT = new Font("Poppins Bold", Font.PLAIN, 18);
+
 
 }

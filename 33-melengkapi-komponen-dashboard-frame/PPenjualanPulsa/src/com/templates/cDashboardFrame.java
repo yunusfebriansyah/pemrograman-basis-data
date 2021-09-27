@@ -9,9 +9,10 @@ import com.partials.cColor;
 import com.partials.cFonts;
 
 import com.partials.cLabelInfo;
-import com.partials.cBigFont;
-import com.partials.cRadioButton;
-import com.partials.cCheckbox;
+import com.partials.cSidebarMenu;
+import com.partials.cTextarea;
+import com.partials.cScrollPane;
+import com.partials.cTable;
 
 
 public class cDashboardFrame extends JFrame{
@@ -28,10 +29,12 @@ public class cDashboardFrame extends JFrame{
 
   private cLinkKeluar exitLink = new cLinkKeluar(930);
 
-  public cLabelInfo infoPulsa = new cLabelInfo("Sisa pulsa anda", 25, 25);
-  public cBigFont valuePulsa = new cBigFont("15.000", 25, 60);
-  public cRadioButton rd1 = new cRadioButton("Pilihan 1", "pilihan1", 25, 150, 100);
-  public cCheckbox ch1 = new cCheckbox("Checkbox 1", "checkbox1", 200, 150, 100);
+  public cLabelInfo infoTable = new cLabelInfo("Data Tabel", 25, 25);
+  public cSidebarMenu berandaMenu = new cSidebarMenu("Beranda", 70);
+  public cTextarea txtArea = new cTextarea(false);
+  public cScrollPane sp = new cScrollPane(txtArea, 25, 100, 300, 100);
+  public cTable tableUser;
+  public cScrollPane spTable;
 
   public cDashboardFrame()
   {
@@ -80,10 +83,26 @@ public class cDashboardFrame extends JFrame{
     copyrightText.setVerticalAlignment(JLabel.CENTER);
     copyrightText.setForeground(cColor.GRAY);
 
-    content.add(infoPulsa);
-    content.add(valuePulsa);
-    content.add(rd1);
-    content.add(ch1);
+    txtArea.setText("Lorem ipsum dolor sit amet consectetur adipisicing elit.");
+
+    String[] dataUserHeader = {"Nama", "Username", "Umur"};
+    String[][] dataUser = {
+      {"Yunus Febriansyah", "yunusf", "20"},
+      {"Ridwan", "ridwan", "22"}
+    };
+
+    javax.swing.table.DefaultTableModel dmUser = new javax.swing.table.DefaultTableModel(dataUser, dataUserHeader);
+
+    tableUser = new cTable(dmUser);
+
+    spTable = new cScrollPane(tableUser, 25, 300, 500, 100);
+    
+
+    sidebar.add(berandaMenu);
+
+    content.add(infoTable);
+    content.add(sp);
+    content.add(spTable);
     
     header.add(exitLink);
     header.add(roleText);
