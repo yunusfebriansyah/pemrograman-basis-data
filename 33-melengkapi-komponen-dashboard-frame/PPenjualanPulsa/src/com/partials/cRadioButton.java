@@ -10,7 +10,6 @@ public class cRadioButton extends JRadioButton {
     setFont(cFonts.RADIO_BUTTON_FONT);
     setForeground(cColor.RED);
     setBackground(cColor.WHITE);
-    setHorizontalAlignment(JRadioButton.CENTER);
     setVerticalAlignment(JRadioButton.CENTER);
     setActionCommand(value);
     setText(text);

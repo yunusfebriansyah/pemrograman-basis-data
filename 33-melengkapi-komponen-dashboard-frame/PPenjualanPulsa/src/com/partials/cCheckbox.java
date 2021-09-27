@@ -10,7 +10,6 @@ public class cCheckbox extends JCheckBox {
     setFont(cFonts.RADIO_BUTTON_FONT);
     setForeground(cColor.RED);
     setBackground(cColor.WHITE);
-    setHorizontalAlignment(JCheckBox.CENTER);
     setVerticalAlignment(JCheckBox.CENTER);
     setActionCommand(value);
     setText(text);
