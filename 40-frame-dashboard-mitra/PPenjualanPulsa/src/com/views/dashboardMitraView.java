@@ -1,7 +1,9 @@
 package com.views;
 import com.templates.cDashboardFrame;
 import com.partials.*;
+
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class dashboardMitraView extends cDashboardFrame{
 
@@ -16,19 +18,39 @@ public class dashboardMitraView extends cDashboardFrame{
   private cSidebarMenu menuLogout = new cSidebarMenu("Logout", 70+50+50+50+50);
 
   // components of beranda
-  private cLabelInfo labelBeranda = new cLabelInfo("Label Beranda", 25, 20);
+  private cLabelInfo labelSisaSaldoBeranda = new cLabelInfo("Sisa Saldo Anda", 25, 20);
+  private cBigFont valueSisaSaldoBeranda = new cBigFont("25.000", 25, 60);
+  private cLabelInfo labelPelayananBeranda = new cLabelInfo("Pelayanan Pulsa Customer", 25, 150);
+  private cBigFont valuePelayananBeranda = new cBigFont("10", 25, 190);
+  private cLabelInfo labelRequestPulsaBeranda = new cLabelInfo("Request Pulsa Customer Saat Ini", 25, 280);
+  private cBigFont valueRequestPulsaBeranda = new cBigFont("31", 25, 320);
 
   
   // components of InfoSaldo
-  private cLabelInfo labelInfoSaldo = new cLabelInfo("Label Info Saldo", 25, 20);
+  private cLabelInfo labelSisaSaldoInfoSaldo = new cLabelInfo("Sisa Saldo Anda", 25, 20);
+  private cBigFont valueSisaSaldoInfoSaldo = new cBigFont("25.000", 25, 60);
+  private cLabelInfo labelRequestSaldoInfoSaldo = new cLabelInfo("Data Request", 25, 150);
+  private DefaultTableModel dmRequestSaldo;
+  private cTable tblDataRequestSaldo;
+  private cScrollPane spDataRequestSaldo;
+  private cLabelInfo labelDoRequestSaldoInfoSaldo = new cLabelInfo("Sisa Saldo Anda", 490, 20);
+  private cErrorLabel errorDoRequestSaldoInfoSaldo = new cErrorLabel("tidak bisa melakukan request jika saldo masih diatas 100K", 490, 60, 400, false);
+  private cBlueButton btnRequestSaldo = new cBlueButton("Request", 490, 90, 155);
   
   
   // components of RequestPulsa
-  private cLabelInfo labelRequestPulsa = new cLabelInfo("Label Request Pulsa", 25, 20);
+  private cLabelInfo labelDataRequestPulsa = new cLabelInfo("Sisa Saldo Anda", 25, 20);
+  private DefaultTableModel dmRequestPulsa;
+  private cTable tblDataRequestPulsa;
+  private cScrollPane spDataRequestPulsa;
+  private cBlueButton btnIsiPulsa = new cBlueButton("Isi Pulsa", 25, 280, 155);
   
 
-  // components of RequestPulsa
-  private cLabelInfo labelTransaksiSaya = new cLabelInfo("Label Transaksi Saya", 25, 20);
+  // components of Transaksi Saya
+  private cLabelInfo labelDataTransaksiSaya = new cLabelInfo("Data Pelayanan Pulsa Berhasil Anda", 25, 20);
+  private DefaultTableModel dmTransaksiSaya;
+  private cTable tblDataTransaksiSaya;
+  private cScrollPane spDataTransaksiSaya;
 
 
 
@@ -135,8 +157,12 @@ public class dashboardMitraView extends cDashboardFrame{
     menuBeranda.setForeground(cColor.WHITE);
     refreshContent();
     menuBeranda.setSidebarAktif();
-    menuTitle.setText("Beranda");
-    content.add(labelBeranda);
+    content.add(labelSisaSaldoBeranda);
+    content.add(valueSisaSaldoBeranda);
+    content.add(labelPelayananBeranda);
+    content.add(valuePelayananBeranda);
+    content.add(labelRequestPulsaBeranda);
+    content.add(valueRequestPulsaBeranda);
     setVisible(true);
   }
 
@@ -149,7 +175,24 @@ public class dashboardMitraView extends cDashboardFrame{
     refreshContent();
     menuInfoSaldo.setSidebarAktif();
     menuTitle.setText("Informasi Saldo");
-    content.add(labelInfoSaldo);
+    String[] dataUserHeader = {"Header 1", "Header 2", "Header 3"};
+    String[][] dataUser = {
+      {"Row1 Col1", "Row1 Col2", "Row1 Col3"},
+      {"Row2 Col1", "Row2 Col2", "Row2 Col3"},
+      {"Row3 Col1", "Row3 Col2", "Row3 Col3"},
+      {"Row4 Col1", "Row4 Col2", "Row4 Col3"},
+      {"Row5 Col1", "Row5 Col2", "Row5 Col3"}
+    };
+    dmRequestSaldo = new DefaultTableModel(dataUser, dataUserHeader);
+    tblDataRequestSaldo = new cTable(dmRequestSaldo);
+    spDataRequestSaldo = new cScrollPane(tblDataRequestSaldo, 25, 190, 400, 220);
+    content.add(labelSisaSaldoInfoSaldo);
+    content.add(valueSisaSaldoInfoSaldo);
+    content.add(labelRequestSaldoInfoSaldo);
+    content.add(spDataRequestSaldo);
+    content.add(labelDoRequestSaldoInfoSaldo);
+    content.add(errorDoRequestSaldoInfoSaldo);
+    content.add(btnRequestSaldo);
     setVisible(true);
   }
 
@@ -162,7 +205,20 @@ public class dashboardMitraView extends cDashboardFrame{
     refreshContent();
     menuRequestPulsa.setSidebarAktif();
     menuTitle.setText("Request Pulsa Customer");
-    content.add(labelRequestPulsa);
+    String[] dataUserHeader = {"Header 1", "Header 2", "Header 3"};
+    String[][] dataUser = {
+      {"Row1 Col1", "Row1 Col2", "Row1 Col3"},
+      {"Row2 Col1", "Row2 Col2", "Row2 Col3"},
+      {"Row3 Col1", "Row3 Col2", "Row3 Col3"},
+      {"Row4 Col1", "Row4 Col2", "Row4 Col3"},
+      {"Row5 Col1", "Row5 Col2", "Row5 Col3"}
+    };
+    dmRequestPulsa = new DefaultTableModel(dataUser, dataUserHeader);
+    tblDataRequestPulsa = new cTable(dmRequestPulsa);
+    spDataRequestPulsa = new cScrollPane(tblDataRequestPulsa, 25, 76, 740, 190);
+    content.add(labelDataRequestPulsa);
+    content.add(spDataRequestPulsa);
+    content.add(btnIsiPulsa);
     setVisible(true);
   }
 
@@ -175,7 +231,19 @@ public class dashboardMitraView extends cDashboardFrame{
     refreshContent();
     menuTransaksiSaya.setSidebarAktif();
     menuTitle.setText("Transaksi Pulsa Anda");
-    content.add(labelTransaksiSaya);
+    String[] dataUserHeader = {"Header 1", "Header 2", "Header 3"};
+    String[][] dataUser = {
+      {"Row1 Col1", "Row1 Col2", "Row1 Col3"},
+      {"Row2 Col1", "Row2 Col2", "Row2 Col3"},
+      {"Row3 Col1", "Row3 Col2", "Row3 Col3"},
+      {"Row4 Col1", "Row4 Col2", "Row4 Col3"},
+      {"Row5 Col1", "Row5 Col2", "Row5 Col3"}
+    };
+    dmTransaksiSaya = new DefaultTableModel(dataUser, dataUserHeader);
+    tblDataTransaksiSaya = new cTable(dmTransaksiSaya);
+    spDataTransaksiSaya = new cScrollPane(tblDataTransaksiSaya, 25, 76, 740, 310);
+    content.add(labelDataTransaksiSaya);
+    content.add(spDataTransaksiSaya);
     setVisible(true);
   }
 
