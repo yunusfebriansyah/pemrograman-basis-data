@@ -157,6 +157,7 @@ public class dashboardMitraView extends cDashboardFrame{
     menuBeranda.setForeground(cColor.WHITE);
     refreshContent();
     menuBeranda.setSidebarAktif();
+    menuTitle.setText("Beranda");
     content.add(labelSisaSaldoBeranda);
     content.add(valueSisaSaldoBeranda);
     content.add(labelPelayananBeranda);
@@ -165,7 +166,7 @@ public class dashboardMitraView extends cDashboardFrame{
     content.add(valueRequestPulsaBeranda);
     setVisible(true);
   }
-
+  
   private void initsInfoSaldo()
   {
     idSelected = null;
