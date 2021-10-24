@@ -42,19 +42,20 @@ public class Controller {
 
   public static void showDashboardCustomer(Integer id)
   {
-    dashboardCustomerView dashboarCustomer = new dashboardCustomerView(id);
-    dashboarCustomer.setVisible(true);
+    dashboardCustomerView dashboardCustomer = new dashboardCustomerView(id);
+    dashboardCustomer.setVisible(true);
   }
 
   public static void showDashboardMitra(Integer id)
   {
-    dashboardMitraView dashboarMitra = new dashboardMitraView(id);
-    dashboarMitra.setVisible(true);
+    dashboardMitraView dashboardMitra = new dashboardMitraView(id);
+    dashboardMitra.setVisible(true);
   }
 
   public static void showDashboardAdmin(boolean statusLogin)
   {
-
+    dashboardAdminView dashboardAdmin = new dashboardAdminView(statusLogin);
+    dashboardAdmin.setVisible(true);
   }
   
 }

@@ -7,8 +7,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class dashboardCustomerView extends cDashboardFrame{
 
-  Integer idCustomer = null;
-  Integer idSelected = null;
+  private Integer idCustomer = null;
+  private Integer idSelected = null;
 
   // sidebar menu
   private cSidebarMenu menuBeranda = new cSidebarMenu("Beranda", 70);

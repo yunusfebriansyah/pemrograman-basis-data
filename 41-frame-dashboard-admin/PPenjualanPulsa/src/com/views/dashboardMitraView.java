@@ -7,8 +7,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class dashboardMitraView extends cDashboardFrame{
 
-  Integer idMitra = null;
-  Integer idSelected = null;
+  private Integer idMitra = null;
+  private Integer idSelected = null;
 
   // sidebar menu
   private cSidebarMenu menuBeranda = new cSidebarMenu("Beranda", 70);
@@ -157,6 +157,7 @@ public class dashboardMitraView extends cDashboardFrame{
     menuBeranda.setForeground(cColor.WHITE);
     refreshContent();
     menuBeranda.setSidebarAktif();
+    menuTitle.setText("Beranda");
     content.add(labelSisaSaldoBeranda);
     content.add(valueSisaSaldoBeranda);
     content.add(labelPelayananBeranda);
