@@ -1529,9 +1529,147 @@ public class Model {
   }
 
 
+  // Detail get Data
+  public static Object[] getDetailMitra( int idMitra )
+  {
+    connection();
 
+    Object rowData[] = new Object[3];
 
+    try {
 
+      // buat object statement yang ambil dari koneksi
+      statement = connect.createStatement();
+
+      // query select
+      String query = "SELECT * FROM vwallmitra WHERE idMitra = " + idMitra;
+
+      // eksekusi query-nya
+      ResultSet resultData = statement.executeQuery(query);
+      
+      // looping pengisian DefaultTableModel
+      resultData.next();
+      rowData[0] = resultData.getInt("idMitra");
+      rowData[1] = resultData.getString("namaMitra");
+      rowData[2] = resultData.getString("emailMitra");
+      
+      // close statement dan connection
+      statement.close();
+      connect.close();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return rowData;
+
+  }
+  
+  public static Object[] getDetailCustomer( int idCustomer )
+  {
+    connection();
+
+    Object rowData[] = new Object[4];
+
+    try {
+
+      // buat object statement yang ambil dari koneksi
+      statement = connect.createStatement();
+
+      // query select
+      String query = "SELECT * FROM vwcustomer WHERE idCustomer = " + idCustomer;
+
+      // eksekusi query-nya
+      ResultSet resultData = statement.executeQuery(query);
+      
+      // looping pengisian DefaultTableModel
+      resultData.next();
+      rowData[0] = resultData.getInt("idCustomer");
+      rowData[1] = resultData.getString("namaCustomer");
+      rowData[2] = resultData.getString("nomorHpCustomer");
+      rowData[3] = resultData.getString("emailCustomer");
+      
+      // close statement dan connection
+      statement.close();
+      connect.close();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return rowData;
+
+  }
+  
+  public static Object[] getDetailPulsaKuotaCustomer( int idCustomer )
+  {
+    connection();
+
+    Object[] pulsaKuota = new Object[2];
+
+    try {
+
+      // buat object statement yang ambil dari koneksi
+      statement = connect.createStatement();
+
+      // query select
+      String query = "SELECT pulsaCustomer, kuotaCustomer FROM vwpulsakuotacustomer WHERE idCustomer = " + idCustomer;
+
+      // eksekusi query-nya
+      ResultSet resultData = statement.executeQuery(query);
+      
+      // looping pengisian DefaultTableModel
+      resultData.next();
+      pulsaKuota[0] = resultData.getInt("pulsaCustomer");
+      pulsaKuota[1] = resultData.getInt("kuotaCustomer");
+      
+      // close statement dan connection
+      statement.close();
+      connect.close();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return pulsaKuota;
+  }
+
+  public static Object[] getDetailPaket( int idPaket )
+  {
+    connection();
+
+    Object[] rowData = new Object[6];
+
+    try {
+
+      // buat object statement yang ambil dari koneksi
+      statement = connect.createStatement();
+
+      // query select
+      String query = "SELECT * FROM tblpaket WHERE idPaket = " + idPaket;
+
+      // eksekusi query-nya
+      ResultSet resultData = statement.executeQuery(query);
+      
+      // looping pengisian DefaultTableModel
+      resultData.next();
+      rowData[0] = resultData.getInt("idPaket");
+      rowData[1] = resultData.getString("namaPaket");
+      rowData[2] = resultData.getString("deskripsiPaket");
+      rowData[3] = resultData.getInt("kuota");
+      rowData[4] = resultData.getInt("hargaPaket");
+      rowData[5] = resultData.getString("statusAktif");
+      
+      // close statement dan connection
+      statement.close();
+      connect.close();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return rowData;
+
+  }
 
 
 }
